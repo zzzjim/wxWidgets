@@ -178,7 +178,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapBaseModule, wxModule);
 // wxBitmap common
 // ----------------------------------------------------------------------------
 
-#if !(defined(__WXGTK__) || defined(__WXMOTIF__) || defined(__WXX11__) || defined(__WXQT__))
+#if !(defined(__WXGTK__) || defined(__WXMOTIF__) || defined(__WXX11__) || defined(__WXQT__) || defined(__WXWASM__))
 
 wxBitmap::wxBitmap(const char* const* bits)
 {

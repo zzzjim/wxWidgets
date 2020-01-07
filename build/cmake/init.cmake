@@ -441,3 +441,27 @@ if(wxUSE_GUI)
         set(wxUSE_LIBGNOMEVFS OFF)
     endif()
 endif()
+
+if(WXWASM)
+    message(STATUS "adding SDL wasm options")
+    wx_string_append(wasm_opts " --source-map-base https://localhost/wx/")
+    wx_string_append(wasm_opts " -s ASSERTIONS=1")
+    wx_string_append(wasm_opts " -s USE_PTHREADS=1")
+    wx_string_append(wasm_opts " -s WASM=1")
+    wx_string_append(wasm_opts " -s DEMANGLE_SUPPORT=1")
+    # don't need this yet wx_string_append(wasm_opts " -s FETCH=1")
+    # broken parsing on windows ?? wx_string_append(wasm_opts " -s SDL2_IMAGE_FORMATS=\'[\"png\"]\'")
+    wx_string_append(wasm_opts " -s USE_SDL=2")
+
+    # sdl image is broken, header directory is incorrect, disabling for now
+    #wx_string_append(wasm_opts " -s USE_LIBPNG=1")
+    #wx_string_append(wasm_opts " -s USE_SDL_IMAGE=2")
+    #wx_string_append(wasm_opts " -s SDL2_IMAGE_FORMATS=\"[\"\"png\"\"]\"")
+    wx_string_append(wasm_opts " -s USE_ZLIB=1")
+    # note -g4 must be set in cmake var or need to replace the -g somewhere wx_string_append(wasm_opts " -g4")
+    # if -g come before -g4 no source maps are generated
+    
+    wx_string_append(CMAKE_C_FLAGS ${wasm_opts})
+    wx_string_append(CMAKE_CXX_FLAGS ${wasm_opts})
+    wx_string_append(LINK_FLAGS ${wasm_opts})
+endif()

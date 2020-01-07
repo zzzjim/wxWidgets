@@ -224,6 +224,10 @@ protected:
     #include "wx/osx/region.h"
 #elif defined(__WXQT__)
     #include "wx/qt/region.h"
+#elif defined(__WXWASM__)
+    #define wxRegionGeneric wxRegion
+    #define wxRegionIteratorGeneric wxRegionIterator
+    #include "wx/generic/region.h"
 #endif
 
 // ----------------------------------------------------------------------------

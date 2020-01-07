@@ -57,6 +57,7 @@
          !defined(__WXDFB__)   && \
          !defined(__WXX11__)   && \
          !defined(__WXQT__)    && \
+         !defined(__WXWASM__)  && \
           wxUSE_GUI
 #       ifdef __UNIX__
 #           error "No Target! You should use wx-config program for compilation flags!"
@@ -2984,6 +2985,10 @@ typedef const void* WXWidget;
 
 #ifdef __WXQT__
 #include "wx/qt/defs.h"
+#endif
+
+#ifdef __WXWASM__
+#include "wx/wasm/defs.h"
 #endif
 
 /*  include the feature test macros */

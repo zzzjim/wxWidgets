@@ -106,7 +106,12 @@ bool wxSelectSets::SetFD(int fd, int flags)
 
 int wxSelectSets::Select(int nfds, struct timeval *tv)
 {
+#ifdef __EMSCRIPTEN__
+    // exceptfds are unsupported currently with ASSERTIONS=1 this causes an assert
+    return select(nfds, &m_fds[Read], &m_fds[Write], NULL, NULL);
+#else
     return select(nfds, &m_fds[Read], &m_fds[Write], &m_fds[Except], tv);
+#endif
 }
 
 bool wxSelectSets::Handle(int fd, wxFDIOHandler& handler) const

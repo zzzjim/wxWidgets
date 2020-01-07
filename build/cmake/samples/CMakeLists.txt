@@ -6,7 +6,9 @@
 # Copyright:   (c) 2016 wxWidgets development team
 # Licence:     wxWindows licence
 #############################################################################
-
+if ( EMSCRIPTEN )
+	set(CMAKE_EXECUTABLE_SUFFIX ".html")
+endif()
 wx_add_sample(access accesstest.cpp DEPENDS wxUSE_ACCESSIBILITY)
 wx_add_sample(animate anitest.cpp anitest.h DATA throbber.gif hourglass.ani DEPENDS wxUSE_ANIMATIONCTRL)
 wx_add_sample(archive CONSOLE)
