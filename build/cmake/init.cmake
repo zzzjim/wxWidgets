@@ -442,7 +442,7 @@ if(wxUSE_GUI)
     endif()
 endif()
 
-if(WXWASM)
+if(WXWASM AND EMSCRIPTEN)
     message(STATUS "adding SDL wasm options")
     wx_string_append(wasm_opts " --source-map-base https://localhost/wx/")
     wx_string_append(wasm_opts " -s ASSERTIONS=1")

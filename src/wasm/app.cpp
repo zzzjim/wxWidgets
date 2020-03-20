@@ -20,10 +20,11 @@ void WASMAssertHandler(const wxString& file,
                                   const wxString& cond,
                                   const wxString& msg)
 {
+	const char * file_s = file.mb_str();
 	const char * f = func.mb_str();
 	const char * c = cond.mb_str();
 	const char * m = msg.mb_str();
-	printf("WASMAPPASSERT: %d %s %s %s\n", line, f, c, m);
+	printf("WASMAPPASSERT: %s:%d %s %s %s\n", file_s, line, f, c, m);
 }
 
 

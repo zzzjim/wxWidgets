@@ -423,7 +423,9 @@ endif(UNIX)
 
 if(CMAKE_USE_PTHREADS_INIT)
     cmake_push_check_state(RESET)
-    set(CMAKE_REQUIRED_LIBRARIES pthread)
+    if ( NOT ANDROID )
+        set(CMAKE_REQUIRED_LIBRARIES pthread)
+    endif()
     wx_check_cxx_source_compiles("
         void *p;
         pthread_cleanup_push(ThreadCleanupFunc, p);
@@ -456,8 +458,15 @@ if(CMAKE_USE_PTHREADS_INIT)
             pthread.h
             )
         if(NOT HAVE_PTHREAD_RECURSIVE_MUTEX_INITIALIZER)
-            # this may break code working elsewhere, so at least warn about it
-            message(WARNING "wxMutex won't be recursive on this platform")
+            wx_check_c_source_compiles(
+                "pthread_mutex_t attr = PTHREAD_RECURSIVE_MUTEX_INITIALIZER;"
+                HAVE_PTHREAD_RECURSIVE_MUTEX_INITIALIZER_P
+                pthread.h
+                )
+            if(NOT HAVE_PTHREAD_RECURSIVE_MUTEX_INITIALIZER_P)
+                # this may break code working elsewhere, so at least warn about it
+                message(WARNING "wxMutex won't be recursive on this platform")
+            endif()
         endif()
     endif()
     if(wxUSE_COMPILER_TLS)
@@ -670,7 +679,7 @@ endforeach()
 check_type_size("long long" SIZEOF_LONG_LONG)
 check_type_size(ssize_t SSIZE_T)
 
-test_big_endian(WORDS_BIGENDIAN)
+#test_big_endian(WORDS_BIGENDIAN)
 
 configure_file(build/cmake/setup.h.in ${wxSETUP_HEADER_FILE})
 if(DEFINED wxSETUP_HEADER_FILE_DEBUG)

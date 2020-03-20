@@ -28,9 +28,10 @@ wxGUIEventLoop::wxGUIEventLoop()
 
 wxWASMConsoleEventLoop::wxWASMConsoleEventLoop() :  m_wakeMutex(), m_wakeCondition(m_wakeMutex)
 {
+#ifndef __ANDROID__
     wxLog* logger = new wxLogStream(&std::cerr);
     wxLog::SetActiveTarget(logger);
-
+#endif
     m_wakeMutex.Lock();
 
 }

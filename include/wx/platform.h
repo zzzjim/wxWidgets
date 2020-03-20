@@ -136,7 +136,7 @@
 
 #endif /* (__WXGTK__ || __WXQT__) && __WINDOWS__ */
 
-#ifdef __ANDROID__
+#if defined(__ANDROID__) && !defined(__WXWASM__)
 #   define __WXANDROID__
 #   include "wx/android/config_android.h"
 #endif
