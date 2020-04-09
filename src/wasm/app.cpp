@@ -11,6 +11,9 @@
 #include "wx/app.h"
 #include "wx/apptrait.h"
 #include "wx/debug.h"
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxApp, wxEvtHandler);
 
@@ -25,6 +28,12 @@ void WASMAssertHandler(const wxString& file,
 	const char * c = cond.mb_str();
 	const char * m = msg.mb_str();
 	printf("WASMAPPASSERT: %s:%d %s %s %s\n", file_s, line, f, c, m);
+#ifdef __EMSCRIPTEN__
+	EM_ASM(
+		console.log(stackTrace());
+	);
+#endif
+
 }
 
 
