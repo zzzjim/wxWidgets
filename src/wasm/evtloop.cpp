@@ -26,13 +26,10 @@ wxGUIEventLoop::wxGUIEventLoop()
 #endif // wxUSE_GUI
 
 
-wxWASMConsoleEventLoop::wxWASMConsoleEventLoop() :  m_wakeMutex(), m_wakeCondition(m_wakeMutex)
+wxWASMConsoleEventLoop::wxWASMConsoleEventLoop()
 {
-#ifndef __ANDROID__
     wxLog* logger = new wxLogStream(&std::cerr);
     wxLog::SetActiveTarget(logger);
-#endif
-    m_wakeMutex.Lock();
 
 }
 wxWASMConsoleEventLoop::~wxWASMConsoleEventLoop()
@@ -72,38 +69,39 @@ int wxWASMConsoleEventLoop::DispatchTimeout(unsigned long timeout)
         }
     }
 #endif // wxUSE_TIMER
-    wxCondError hadEvent;
+    wxSemaError hadEvent;
     if ( timeout == 0 || timeout == -1 )
     {
-        hadEvent = m_wakeCondition.WaitTimeout(1000000);
+        hadEvent = m_wakeSem.Wait();
     }
     else
     {
-        hadEvent = m_wakeCondition.WaitTimeout(timeout);
+        hadEvent = m_wakeSem.WaitTimeout(timeout);
     }
 
 #if wxUSE_TIMER
     if ( wxTimerScheduler::Get().NotifyExpired() )
     {
-        hadEvent = wxCOND_NO_ERROR;
+        hadEvent = wxSEMA_NO_ERROR;
     }
 #endif // wxUSE_TIMER
 	
     switch ( hadEvent )
     {
-        case wxCOND_TIMEOUT:
-        case wxCOND_INVALID:
-        case wxCOND_MISC_ERROR:
+        case wxSEMA_TIMEOUT:
+        case wxSEMA_INVALID:
+        case wxSEMA_MISC_ERROR:
+        case wxSEMA_BUSY:
+        case wxSEMA_OVERFLOW:
             return -1;
-        case wxCOND_NO_ERROR:
+        case wxSEMA_NO_ERROR:
             return 1;
     }
 }
 
 void wxWASMConsoleEventLoop::WakeUp()
 {
-    m_wakeMutex.Unlock();
-    m_wakeCondition.Broadcast();
+    m_wakeSem.Post();
 }
 
 void wxWASMConsoleEventLoop::DoYieldFor(long eventsToProcess)

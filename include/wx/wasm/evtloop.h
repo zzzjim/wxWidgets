@@ -37,8 +37,7 @@ public:
     virtual void WakeUp() wxOVERRIDE;
 private:
     // thread and condition to wakeup from threads
-    wxCondition m_wakeCondition;
-    wxMutex m_wakeMutex;
+    wxSemaphore m_wakeSem;
     wxDECLARE_NO_COPY_CLASS(wxWASMConsoleEventLoop);
 };
 
