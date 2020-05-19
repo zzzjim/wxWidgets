@@ -85,6 +85,8 @@ public:
     #include "wx/osx/dataform.h"
 #elif defined(__WXQT__)
     #include "wx/qt/dataform.h"
+#elif defined(__WXWASM__)
+    #include "wx/wasm/dataform.h"
 #endif
 
 // the value for default argument to some functions (corresponds to

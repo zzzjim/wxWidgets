@@ -219,7 +219,7 @@ MyFrame::MyFrame(const wxString& title, int x, int y, int w, int h)
     SetBackgroundColour(*wxWHITE);
 
     // Give it an icon
-    SetIcon(wxICON(sample));
+    //SetIcon(wxICON(sample));
 
 #if wxUSE_MENUS
     // Make a menubar

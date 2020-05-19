@@ -50,6 +50,7 @@
 #include "wx/image.h"
 #include "wx/imaglist.h"
 #include "wx/bmpcbox.h"
+#include "wx/filedlg.h"
 
 #include "itemcontainer.h"
 #include "widgets.h"

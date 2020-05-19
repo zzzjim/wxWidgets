@@ -3216,3 +3216,66 @@ set(STC_OSX_COCOA_SRC
 set(STC_OSX_COCOA_HDR
 )
 
+set(WASM_HDR
+    ${UNIV_HDR}
+    wx/wasm/dcmemory.h
+    wx/wasm/app.h
+    wx/wasm/bitmap.h
+    wx/wasm/brush.h
+    wx/wasm/chkconf.h
+    wx/wasm/cursor.h
+    wx/wasm/dataform.h
+    wx/wasm/dataobj.h
+    wx/wasm/dataobj2.h
+    wx/wasm/dc.h
+    wx/wasm/dcclient.h
+    wx/wasm/dcmemory.h
+    wx/wasm/dcprint.h
+    wx/wasm/dcscreen.h
+    wx/wasm/defs.h
+    wx/wasm/evtloop.h
+    wx/wasm/font.h
+    wx/wasm/pen.h
+    wx/wasm/popupwin.h
+    wx/wasm/region.h
+    wx/wasm/setup0.h
+    wx/wasm/taskbar.h
+    wx/wasm/toplevel.h
+    wx/wasm/window.h
+)
+set(WASM_SRC
+    ${UNIV_SRC}
+    ${UNIV_THEMES_SRC}
+    src/wasm/apptraits.cpp
+    src/wasm/evtloop.cpp
+    src/wasm/popupwin.cpp
+    src/wasm/toplevel.cpp
+    src/wasm/app.cpp
+    src/wasm/bitmap.cpp
+    src/wasm/dc.cpp
+    src/wasm/dcclient.cpp
+    src/wasm/dcmemory.cpp
+    src/wasm/dcprint.cpp
+    src/wasm/dcscreen.cpp
+    src/wasm/display.cpp
+    src/wasm/font.cpp
+    src/wasm/fontenum.cpp
+    src/wasm/fontutil.cpp
+    src/wasm/pen.cpp
+    src/wasm/settings.cpp
+    src/wasm/window.cpp
+    src/wasm/cursor.cpp
+    src/wasm/brush.cpp
+    src/wasm/utils.cpp
+    src/wasm/taskbar.cpp
+    src/common/taskbarcmn.cpp
+    src/generic/paletteg.cpp
+    src/generic/regiong.cpp
+    src/generic/caret.cpp
+    src/generic/colour.cpp
+    src/generic/icon.cpp
+    src/generic/imaglist.cpp
+    src/generic/mask.cpp
+    src/generic/textmeasure.cpp
+)
+

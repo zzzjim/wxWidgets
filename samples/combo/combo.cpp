@@ -615,7 +615,7 @@ MyFrame::MyFrame(const wxString& title)
     wxBoxSizer* rowSizer;
 
     // set the frame icon
-    SetIcon(wxICON(sample));
+    //SetIcon(wxICON(sample));
 
 #if wxUSE_MENUS
     // create a menu bar

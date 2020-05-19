@@ -10,6 +10,8 @@
 #ifndef _WX_GENERIC_NOTIFMSG_H_
 #define _WX_GENERIC_NOTIFMSG_H_
 
+#include "wx/notifmsg.h"
+
 // ----------------------------------------------------------------------------
 // wxGenericNotificationMessage
 // ----------------------------------------------------------------------------

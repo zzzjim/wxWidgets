@@ -374,7 +374,10 @@ protected:
     #define wxTopLevelWindowNative wxTopLevelWindowMotif
 #elif defined(__WXQT__)
     #include "wx/qt/toplevel.h"
-#define wxTopLevelWindowNative wxTopLevelWindowQt
+    #define wxTopLevelWindowNative wxTopLevelWindowQt
+#elif defined(__WXWASM__)
+    #include "wx/wasm/toplevel.h"
+    #define wxTopLevelWindowNative wxTopLevelWindowWASM
 #endif
 
 #ifdef __WXUNIVERSAL__

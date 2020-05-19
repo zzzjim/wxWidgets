@@ -13,6 +13,12 @@
 #ifndef _WX_PLATFORM_H_
 #define _WX_PLATFORM_H_
 
+#ifdef __EMSCRIPTEN__
+#    ifndef __WXWASM__
+#        define __WXWASM__ 1
+#    endif
+#endif
+
 #ifdef __WXMAC_XCODE__
 #    include <unistd.h>
 #    include <TargetConditionals.h>

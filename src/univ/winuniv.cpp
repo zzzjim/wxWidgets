@@ -99,6 +99,8 @@ public:
     wxIMPLEMENT_DYNAMIC_CLASS(wxWindow, wxWindowDFB);
 #elif defined(__WXX11__)
     wxIMPLEMENT_DYNAMIC_CLASS(wxWindow, wxWindowX11);
+#elif defined(__WXWASM__)
+    wxIMPLEMENT_DYNAMIC_CLASS(wxWindow, wxWindowWASM);
 #endif
 
 wxBEGIN_EVENT_TABLE(wxWindow, wxWindowNative)
@@ -168,6 +170,8 @@ bool wxWindow::Create(wxWindow *parent,
     //        in OnSize() instead
     actualStyle |= wxFULL_REPAINT_ON_RESIZE;
 #endif
+    #pragma message("Can I remove this")
+    actualStyle |= wxFULL_REPAINT_ON_RESIZE;
 
     if ( !wxWindowNative::Create(parent, id, pos, size, actualStyle, name) )
         return false;

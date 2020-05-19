@@ -22,6 +22,10 @@
 #include "wx/artprov.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/dcmemory.h"
+    #include "wx/pen.h"
+    #include "wx/dcclient.h"
+    #include "wx/brush.h"
     #include "wx/list.h"
     #include "wx/log.h"
     #include "wx/hashmap.h"

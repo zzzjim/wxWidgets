@@ -86,6 +86,12 @@
     #include "wx/qt/dcmemory.h"
     #include "wx/qt/dcscreen.h"
 #endif
+
+#ifdef __WXWASM__
+    #include "wx/wasm/dcclient.h"
+    #include "wx/wasm/dcmemory.h"
+    #include "wx/wasm/dcscreen.h"
+#endif
 //----------------------------------------------------------------------------
 // wxDCFactory
 //----------------------------------------------------------------------------
@@ -1165,6 +1171,7 @@ void wxDC::DrawLabel(const wxString& text,
                          int indexAccel,
                          wxRect *rectBounding)
 {
+    printf("wxDC::DrawLabel: %s\n", (const char*)text.mb_str());
     // find the text position
     wxCoord widthText, heightText, heightLine;
     GetMultiLineTextExtent(text, &widthText, &heightText, &heightLine);

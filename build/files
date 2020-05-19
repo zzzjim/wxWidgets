@@ -407,6 +407,10 @@ OPENGL_QT_HDR=
 OPENGL_QT_SRC=
     src/qt/glcanvas.cpp
 
+WASM_HDR =
+    wx/wasm/dcmemory.h
+WASM_SRC =
+    src/wasm/dcmemory.cpp
 ## Common
 
 BASE_CMN_SRC =

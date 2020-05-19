@@ -105,6 +105,10 @@ using namespace std;
 #include <cairo-quartz.h>
 #endif
 
+#ifdef __WXWASM__
+#include "wx/wasm/dc.h"
+#endif
+
 // Helper functions for dealing with alpha pre-multiplication.
 namespace
 {

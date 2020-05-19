@@ -130,6 +130,8 @@ bool MyApp::OnInit()
     // created initially)
     frame->Show(true);
 
+    frame->SetSize(500, 200);
+
     // success: wxApp::OnRun() will be called which will enter the main message
     // loop and the application will run. If we returned false here, the
     // application would exit immediately.
@@ -147,6 +149,7 @@ MyFrame::MyFrame(const wxString& title)
     // set the frame icon
     SetIcon(wxICON(sample));
 
+#undef wxUSE_MENUS
 #if wxUSE_MENUS
     // create a menu bar
     wxMenu *fileMenu = new wxMenu;

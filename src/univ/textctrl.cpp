@@ -148,6 +148,7 @@
 
 #include "wx/cmdproc.h"
 
+/*
 #if wxDEBUG_LEVEL >= 2
     // turn extra wxTextCtrl-specific debugging on/off
     #define WXDEBUG_TEXT
@@ -155,11 +156,11 @@
     // turn wxTextCtrl::Replace() debugging on (slows down code a *lot*!)
     #define WXDEBUG_TEXT_REPLACE
 #endif // wxDEBUG_LEVEL >= 2
-
 // wxStringTokenize only needed for debug checks
 #ifdef WXDEBUG_TEXT_REPLACE
     #include "wx/tokenzr.h"
 #endif // WXDEBUG_TEXT_REPLACE
+*/
 
 // ----------------------------------------------------------------------------
 // wxStdTextCtrlInputHandler: this control handles only the mouse/kbd actions

@@ -681,6 +681,10 @@ function(wx_add_sample name)
             list(APPEND cmds COMMAND ${CMAKE_COMMAND}
                 -E copy ${wxSOURCE_DIR}/samples/${wxSAMPLE_SUBDIR}${name}/${data_file}
                 ${wxOUTPUT_DIR}/${wxPLATFORM_LIB_DIR}/${data_file})
+            # embed data for wasm
+            if (EMSCRIPTEN)
+                target_link_options(${target_name} PRIVATE "SHELL: --embed-file ${wxSOURCE_DIR}/samples/${wxSAMPLE_SUBDIR}${name}/${data_file}@${data_file}")
+            endif()
         endforeach()
         add_custom_command(
             TARGET ${target_name} ${cmds}
@@ -717,6 +721,21 @@ function(wx_add_sample name)
     set_target_properties(${target_name} PROPERTIES
         VS_DEBUGGER_WORKING_DIRECTORY "${wxOUTPUT_DIR}/${wxCOMPILER_PREFIX}${wxARCH_SUFFIX}_${lib_suffix}"
         )
+    target_compile_options(${target_name} PRIVATE
+    )
+    if(EMSCRIPTEN)
+        target_link_options(${target_name} PRIVATE
+            "SHELL:-s PROXY_TO_PTHREAD=1"
+            "SHELL:--source-map-base https://localhost/wx/"
+            "SHELL:-s NO_EXIT_RUNTIME=1"
+            "SHELL:-s ASSERTIONS=1"
+            "SHELL:-s WASM_MEM_MAX=128MB"
+            "SHELL:-s TOTAL_MEMORY=128MB"
+            "SHELL:-s PTHREAD_POOL_SIZE=4"
+            "SHELL:-s WASM=1"
+            "SHELL:-g4"
+        )
+    endif()
 endfunction()
 
 # Link libraries to a sample

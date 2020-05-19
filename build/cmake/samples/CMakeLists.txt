@@ -6,7 +6,9 @@
 # Copyright:   (c) 2016 wxWidgets development team
 # Licence:     wxWindows licence
 #############################################################################
-
+if ( EMSCRIPTEN )
+	set(CMAKE_EXECUTABLE_SUFFIX ".html")
+endif()
 wx_add_sample(access accesstest.cpp DEPENDS wxUSE_ACCESSIBILITY)
 wx_add_sample(animate anitest.cpp anitest.h DATA throbber.gif hourglass.ani DEPENDS wxUSE_ANIMATIONCTRL)
 wx_add_sample(archive CONSOLE)
@@ -146,7 +148,7 @@ wx_add_sample(taskbar tbtest.cpp tbtest.h DEPENDS wxUSE_TASKBARICON)
 wx_add_sample(text DEPENDS wxUSE_TEXTCTRL)
 wx_add_sample(thread DEPENDS wxUSE_THREADS)
 wx_add_sample(toolbar RES toolbar.rc DEPENDS wxUSE_TOOLBAR)
-wx_add_sample(treectrl treetest.cpp treetest.h DEPENDS wxUSE_TREECTRL)
+wx_add_sample(treectrl treetest.cpp treetest.h DEPENDS wxUSE_TREECTRL DATA checked.xpm icon1.xpm icon2.xpm icon3.xpm icon4.xpm icon5.xpm state1.xpm state2.xpm state3.xpm state4.xpm state5.xpm unchecked.xpm)
 wx_add_sample(treelist DEPENDS wxUSE_TREELISTCTRL)
 wx_add_sample(typetest typetest.cpp typetest.h)
 wx_add_sample(uiaction DEPENDS wxUSE_UIACTIONSIMULATOR)

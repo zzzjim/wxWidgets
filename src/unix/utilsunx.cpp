@@ -927,6 +927,10 @@ wxString wxGetUserHome( const wxString &user )
 static wxString
 wxGetCommandOutput(const wxString &cmd, wxMBConv& conv = wxConvISO8859_1)
 {
+#ifdef EMSCRIPTEN
+    wxLogSysError(wxT("popen unssupported, Executing \"%s\" failed"), cmd);
+    return wxString();
+#else
     // Suppress stderr from the shell to avoid outputting errors if the command
     // doesn't exist.
     FILE *f = popen((cmd + " 2>/dev/null").ToAscii(), "r");
@@ -955,6 +959,7 @@ wxGetCommandOutput(const wxString &cmd, wxMBConv& conv = wxConvISO8859_1)
         s.RemoveLast();
 
     return s;
+#endif
 }
 
 // retrieve either the hostname or FQDN depending on platform (caller must
